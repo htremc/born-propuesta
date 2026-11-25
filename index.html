@@ -287,6 +287,23 @@ footer{padding-block:22px 28px; font-size:.8rem; color:var(--on-navy-3)}
 .nolose{margin-top:16px; text-align:center; font-size:clamp(1.15rem,2.4vw,1.45rem); font-weight:900; line-height:1.3; color:var(--on-navy)}
 .nolose em{font-style:normal; color:var(--mint)}
 @media (max-width:760px){ .seen,.leak,.sum{grid-template-columns:minmax(0,1fr)} }
+
+/* Demo ya preparada: miniatura del móvil */
+.demobox{display:grid; grid-template-columns:240px minmax(0,1fr); gap:24px; align-items:center; margin:6px 0 18px; background:var(--navy-2); border:2px solid var(--mint); border-radius:20px; padding:20px}
+.phone{position:relative; background:#EFEAE2; border-radius:24px; border:6px solid #05080e; overflow:hidden; height:310px; box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.ph-top{display:flex; align-items:center; gap:8px; background:#008069; color:#fff; padding:9px 10px; font-weight:800; font-size:.82rem; line-height:1.15}
+.ph-top i{flex:none; width:26px; height:26px; border-radius:50%; background:#fff; color:#111; display:grid; place-items:center; font-style:normal; font-weight:900}
+.ph-top small{display:block; font-weight:500; font-size:.68rem; opacity:.85}
+.ph-chat{display:grid; gap:6px; padding:10px; font-size:.8rem; color:#111B21; filter:blur(1.4px)}
+.ph-veil{position:absolute; left:0; right:0; top:44px; bottom:0; display:grid; place-content:center; text-align:center; gap:3px; padding:0 12px; background:rgba(8,16,30,.45)}
+.ph-card{display:grid; gap:3px; background:rgba(10,20,36,.92); border:1.5px solid var(--mint); border-radius:16px; padding:14px 16px; box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.ph-veil span{font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--mint); font-weight:600}
+.ph-veil b{font-size:1.8rem; font-weight:900; color:#fff; letter-spacing:-.01em}
+.ph-veil em{font-style:normal; font-size:.82rem; color:#dfe7ef; font-weight:600}
+.demotxt .pill{display:inline-block; border:1.5px solid var(--mint); color:var(--mint); border-radius:99px; padding:6px 13px; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase}
+.demotxt h3{margin:10px 0 6px; font-size:clamp(1.4rem,2.6vw,1.9rem); font-weight:900; color:var(--on-navy); letter-spacing:-.02em}
+.demotxt p{color:var(--on-navy-2); line-height:1.5; margin:0 0 8px}
+@media (max-width:760px){ .demobox{grid-template-columns:minmax(0,1fr); padding:16px} .phone{width:100%; max-width:260px; margin:0 auto} }
 </style>
 </head>
 <body>
@@ -305,7 +322,7 @@ footer{padding-block:22px 28px; font-size:.8rem; color:var(--on-navy-3)}
         <p class="month num"><b>≈33.500 €/mes</b> en ventas que ya eran vuestras <span class="e">estimado, prudente</span></p>
         <p class="one">Clientas que ya llegaron a vuestra web, eligieron y se fueron en el último paso. Lo hemos medido con vuestro catálogo y vuestras políticas de hoy, y cada cifra lleva su cuenta.</p>
         <div class="btns">
-          <a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Verlo en 10 minutos<small>Con vuestra propia tienda</small></a>
+          <a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Ver vuestra demo en 10 minutos<small>Ya está preparada</small></a>
           <a class="btn ghost" href="#fugas">Ver dónde se escapa</a>
         </div>
       </div>
@@ -446,14 +463,33 @@ footer{padding-block:22px 28px; font-size:.8rem; color:var(--on-navy-3)}
 
   <!-- 4 · EN 10 MINUTOS -->
   <section class="demo" id="demo" aria-labelledby="h-demo">
-    <div class="sec-h"><h2 id="h-demo">En 10 minutos, vuestra tienda funcionando</h2><p>Antes de la llamada preparamos una demo con vuestros productos, vuestras tallas agotadas de ese día y vuestras políticas. La veis tal y como la viviría una clienta de Born.</p></div>
+    <div class="sec-h"><h2 id="h-demo">En 10 minutos, vuestra tienda funcionando</h2><p>La demo de Born ya está preparada. En la llamada la veis funcionando, tal y como la viviría una clienta de Born.</p></div>
+    <div class="demobox">
+      <div class="phone" aria-hidden="true">
+        <div class="ph-top"><i>B</i><span>Born Living Yoga<small>cuenta de empresa oficial</small></span></div>
+        <div class="ph-chat">
+          <p class="msg me">Hola, ¿tenéis el Legging Coreskin Chocolat en la L?<small>10:02</small></p>
+          <p class="msg">¡Hola! 😊 Ahora mismo la L está agotada. ¿Te aviso por aquí en cuanto vuelva?<small>10:02</small></p>
+          <p class="msg me">¡Sí, porfa!<small>10:03</small></p>
+          <p class="cta mint">🔔 Avísame por WhatsApp</p>
+          <p class="msg">¡Ya ha vuelto tu talla! 🎉<small>09:15</small></p>
+        </div>
+        <div class="ph-veil"><div class="ph-card"><span>DEMO DE BORN</span><b>Preparada</b><em>Os la enseñamos en la llamada</em></div></div>
+      </div>
+      <div class="demotxt">
+        <span class="pill">✓ Ya preparada</span>
+        <h3>La demo de Born</h3>
+        <p>Vuestra tienda atendiendo por WhatsApp: vuestros productos, las tallas agotadas de ese día y vuestras políticas de cambio y devolución.</p>
+        <p>Carrito, talla agotada, cambio de color en vez de reembolso, top a juego y dudas en 4 idiomas: todo con lo que vende Born hoy.</p>
+      </div>
+    </div>
     <div class="moments">
       <div class="mo"><span class="k">01 · VUESTRAS CIFRAS</span><b>Cada cifra de esta página, con vuestros datos</b><span>Ticket, conversión, devoluciones: la afinamos juntos en directo.</span></div>
       <div class="mo"><span class="k">02 · SIN TOCAR NADA</span><b>Shopify, Klaviyo, Gorgias y Reveni siguen igual</b><span>Lo nuestro se suma por encima. Vuestro equipo no instala nada.</span></div>
       <div class="mo"><span class="k">03 · Y UNA IDEA MÁS</span><b>Para vuestros 450 puntos de venta</b><span>Reposición de tiendas multimarca por WhatsApp. Os la contamos en la llamada.</span></div>
     </div>
     <p class="nolose">Si en 10 minutos no veis el dinero <em>en vuestra propia tienda</em>, colgáis y en paz.</p>
-    <div class="soon"><a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Reservar los 10 minutos<small>Elegís día y hora</small></a></div>
+    <div class="soon"><a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Reservar los 10 minutos<small>Para ver vuestra demo</small></a></div>
   </section>
 
   <div class="signature"><span><b>Héctor Escobar</b> · COMPOUND (Meta Tech Provider) · <a href="https://www.smart-compound.com/" target="_blank" rel="noopener">smart-compound.com</a></span><span class="num">854 78 87 07 · teléfono y WhatsApp</span></div>
@@ -488,7 +524,7 @@ footer{padding-block:22px 28px; font-size:.8rem; color:var(--on-navy-3)}
   <div class="in">Fuentes: Modaes (26 de marzo de 2026: cifra de negocio de 2025, peso del canal online y puntos de venta) y bornlivingyoga.com, revisada el 24 de noviembre de 2026 sin comprar ni dejar datos (catálogo completo de 902 productos, tallas disponibles, política de cambios y devoluciones). Lo marcado con ≈ o «estimado» son cálculos nuestros y se ajustan con vuestras cifras.</div>
 </footer>
 
-<div class="bar"><a href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Verlo en 10 minutos con vuestra tienda</a></div>
+<div class="bar"><a href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Vuestra demo ya está preparada · Verla en 10 minutos</a></div>
 
 </body>
 </html>
