@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>Born · Lo que se queda sobre la mesa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+
+:root{
+  --navy:#0A1424; --navy-2:#0F1D33; --navy-3:#13263F;
+  --mint:#19D3A2; --mint-ink:#06121F; --mint-text:#0A7358;
+  --cream:#F4F1E8; --paper:#FFFFFF; --ink:#0A1424; --ink-2:#3B4656; --mute:#5B6472; --line:#E3DECF;
+  --on-navy:#FFFFFF; --on-navy-2:#C9D4E0; --on-navy-3:#8FA0B4; --line-dark:rgba(255,255,255,.12);
+  --bad:#FF8A7A; --est:#8A4708; --est-dark:#FBA94A;
+  --sans:"Archivo", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --w:68rem;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{margin:0; background:var(--navy); color:var(--on-navy); font-family:var(--sans); font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased; padding-bottom:calc(86px + env(safe-area-inset-bottom, 0px))}
+.bg{position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(110% 60% at 100% 0%, rgba(25,211,162,.20), transparent 60%),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px) 0 0/36px 36px,
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px) 0 0/36px 36px, var(--navy)}
+a{color:inherit}
+a:focus-visible, summary:focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:6px}
+.wrap{padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.in{max-width:var(--w); margin-inline:auto}
+h1,h2,h3{margin:0; text-wrap:balance}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+em{font-style:normal}
+.e{display:inline-block; vertical-align:.15em; font-family:var(--mono); font-size:10px; line-height:1.45; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border:1px solid currentColor; border-radius:99px; padding:0 7px; white-space:nowrap; color:var(--est)}
+.hero .e, .fx .e, .demo .e, .pc.dark .e{color:var(--est-dark)}
+
+/* Botones */
+.btns{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
+.btn{display:inline-flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; text-decoration:none; background:var(--mint); color:var(--mint-ink); font-weight:900; font-size:17px; letter-spacing:.01em; border-radius:14px; padding:14px 22px; box-shadow:0 0 0 5px rgba(25,211,162,.22)}
+.btn small{font-size:12px; font-weight:700; opacity:.8; margin-top:3px; letter-spacing:0}
+.btn.big{font-size:clamp(18px,2.2vw,21px); padding:18px 28px; border-radius:16px}
+.btn.ghost{background:transparent; color:var(--on-navy); box-shadow:none; border:1.5px solid rgba(255,255,255,.35)}
+
+/* ---------- 1 · Portada ---------- */
+.top{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center; padding-block:20px 6px; font-size:12px; letter-spacing:.2em; font-weight:800}
+.top b{color:var(--mint)}
+.toplink{color:inherit; text-decoration:none}
+.toplink .web{display:inline-block; margin-left:8px; padding:3px 9px; border:1.5px solid rgba(25,211,162,.6); border-radius:99px; letter-spacing:.06em; color:var(--mint); white-space:nowrap}
+.toplink:hover .web{background:var(--mint); color:var(--mint-ink)}
+.chip{border:1px solid rgba(25,211,162,.55); color:var(--mint); border-radius:99px; padding:5px 12px; font-size:11px; letter-spacing:.14em; font-weight:800}
+.hero{display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,.55fr); gap:clamp(24px,4vw,56px); align-items:center; padding-block:clamp(30px,6vw,64px) clamp(36px,6vw,72px)}
+.eyebrow{font-size:12.5px; letter-spacing:.3em; font-weight:800; color:var(--mint); text-transform:uppercase; text-shadow:0 0 14px rgba(25,211,162,.45)}
+.pre{margin-top:18px; font-size:clamp(1.3rem,2.8vw,1.8rem); font-weight:800}
+.mega{margin-top:4px; line-height:.92; font-weight:900; letter-spacing:-.045em; white-space:nowrap}
+.mega .n{font-size:clamp(3.2rem,9vw,6.6rem); color:var(--mint); text-shadow:0 0 36px rgba(25,211,162,.38)}
+.mega .u{font-size:clamp(1.5rem,3.6vw,2.6rem); color:var(--mint); letter-spacing:-.02em; margin-left:4px}
+.month{margin-top:12px; font-size:clamp(1.15rem,2.4vw,1.5rem); font-weight:700; color:var(--on-navy-2)}
+.month b{color:var(--on-navy); font-weight:900}
+.one{margin-top:10px; font-size:1.02rem; color:var(--on-navy-3)}
+.stamp{justify-self:center; width:clamp(170px,22vw,230px); aspect-ratio:1; border-radius:50%; display:grid; place-content:center; text-align:center; color:var(--mint);
+  border:4px solid var(--mint); box-shadow:inset 0 0 0 8px var(--navy), inset 0 0 0 10px rgba(25,211,162,.7), 0 0 40px rgba(25,211,162,.25);
+  background:radial-gradient(circle, rgba(25,211,162,.14), transparent 70%); transform:rotate(-10deg)}
+.stamp span{display:block; font-weight:900; line-height:1}
+.stamp .s1{font-size:clamp(1rem,1.6vw,1.2rem); letter-spacing:.14em}
+.stamp .s1 sup{font-size:.6em}
+.stamp .s2{font-size:clamp(2.1rem,3.6vw,2.8rem); letter-spacing:-.02em; margin:4px 0; color:var(--on-navy)}
+.stamp .s3{font-size:clamp(.95rem,1.5vw,1.1rem); letter-spacing:.2em}
+
+/* ---------- Hoja crema ---------- */
+.sheet{background:var(--cream); color:var(--ink); border-radius:30px; padding:clamp(16px,3.2vw,40px); display:grid; gap:clamp(18px,2.6vw,28px)}
+.sec-h{display:grid; gap:6px; margin-bottom:18px}
+.sec-h h2{font-size:clamp(1.6rem,3.6vw,2.4rem); line-height:1.05; font-weight:900; letter-spacing:-.015em; text-transform:uppercase}
+.sec-h p{font-size:1.02rem; color:var(--ink-2)}
+.tag{display:inline-block; background:var(--mint); color:var(--mint-ink); border-radius:8px; padding:5px 10px; font-size:12px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; justify-self:start}
+.tag.dark{background:var(--navy); color:var(--mint); border:1px solid rgba(25,211,162,.5)}
+
+/* ---------- 2 · Problema → Lo resolvemos (mini-historias con el WhatsApp que llega) ---------- */
+.mintband{background:linear-gradient(135deg, #19D3A2, #12B98C); border-radius:22px; padding:clamp(16px,2.6vw,26px)}
+.mintband .sec-h h2{color:var(--mint-ink)}
+.mintband .sec-h p{color:rgba(6,18,31,.78); font-weight:600}
+.fixes{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.fx{background:var(--navy); color:var(--on-navy); border-radius:18px; padding:18px 16px 16px; box-shadow:0 4px 0 rgba(6,18,31,.28); display:flex; flex-direction:column; gap:12px; min-width:0}
+.fx-h{display:flex; align-items:center; gap:12px}
+.fx-h h3{font-size:1.16rem; line-height:1.12; font-weight:900; letter-spacing:-.01em}
+.fx .ico{flex:none; width:44px; height:44px; border-radius:14px; background:var(--mint); color:var(--mint-ink); display:grid; place-items:center}
+.fx .ico svg{width:25px; height:25px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.fx .which{align-self:flex-start; font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--mint); border:1px solid rgba(25,211,162,.5); border-radius:99px; padding:2px 9px}
+.fx .which.later{color:var(--on-navy-2); border:1px dashed rgba(255,255,255,.4)}
+.fx .lb{display:block; font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px}
+.fx .hoy{font-size:.98rem; line-height:1.42; font-weight:600; color:var(--on-navy-2)}
+.fx .hoy .lb{color:var(--bad)}
+.fx .hoy b{color:var(--on-navy); font-weight:800}
+.fx .llega .lb{color:var(--mint)}
+/* El WhatsApp en miniatura: lo que le llega al cliente, tal cual */
+.wa{background:#EFEAE2; border-radius:14px; padding:10px; color:#111B21; display:grid; gap:6px; font-size:.9rem; line-height:1.35}
+.wa-top{display:flex; align-items:center; gap:7px; font-size:.78rem; font-weight:800; color:#3B4A54}
+.wa-top i{width:20px; height:20px; border-radius:50%; background:#00A884; color:#fff; display:grid; place-items:center; font-style:normal; font-size:11px; font-weight:900}
+.wa-top .ok{color:#00A884}
+.msg{justify-self:start; max-width:94%; background:#fff; border-radius:0 10px 10px 10px; padding:7px 9px 5px; box-shadow:0 1px 0 rgba(0,0,0,.12); font-weight:500}
+.msg.me{justify-self:end; background:#D9FDD3; border-radius:10px 0 10px 10px}
+.msg small{display:block; text-align:right; font-size:.68rem; color:#667781; margin-top:2px}
+.cta{justify-self:start; width:94%; background:#fff; border-radius:10px; padding:7px; text-align:center; color:#027EB5; font-weight:700; font-size:.88rem; box-shadow:0 1px 0 rgba(0,0,0,.12)}
+.cta.mint{background:#00A884; color:#fff}
+.stars{justify-self:start; width:94%; display:flex; justify-content:space-around; background:#fff; border-radius:10px; padding:5px 10px; box-shadow:0 1px 0 rgba(0,0,0,.12); font-size:1.35rem; line-height:1.1; color:#F5B400}
+.msg.me{color:#111B21}
+/* El pago en miniatura: la casilla que ve el cliente */
+.ck{background:#fff; color:#111B21; border-radius:14px; padding:12px; display:grid; gap:8px; font-size:.88rem; line-height:1.35}
+.ck .t{font-size:.78rem; font-weight:800; color:#3B4A54; text-transform:uppercase; letter-spacing:.08em}
+.ck .fld{border:1px solid #D5D9DE; border-radius:8px; padding:7px 9px; color:#6B7280}
+.ck .box{display:flex; gap:8px; align-items:flex-start; border:2px solid #19D3A2; background:#ECFBF6; border-radius:8px; padding:8px; font-weight:700}
+.ck .box b{flex:none; width:18px; height:18px; border-radius:4px; background:#0FA07C; color:#fff; display:grid; place-items:center; font-size:12px}
+.ck .pay{background:#111B21; color:#fff; border-radius:8px; padding:8px; text-align:center; font-weight:800}
+/* El producto agotado en miniatura */
+.so{display:flex; align-items:center; gap:8px; background:#fff; border-radius:10px; padding:7px 9px; font-size:.85rem; font-weight:700; color:#111B21}
+.so .ag{margin-left:auto; background:#111B21; color:#fff; border-radius:6px; padding:2px 7px; font-size:.7rem; letter-spacing:.06em}
+.fx .then{margin-top:auto; display:flex; gap:9px; align-items:flex-start; border-top:1px dashed var(--line-dark); padding-top:12px; font-size:.98rem; line-height:1.38; font-weight:800}
+.fx .then::before{content:"✓"; flex:none; width:22px; height:22px; border-radius:50%; background:var(--mint); color:var(--mint-ink); display:grid; place-items:center; font-size:.8rem; font-weight:900}
+.fx-note{margin-top:14px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; background:var(--navy); color:var(--on-navy-2); border-radius:16px; padding:14px 18px; font-size:.98rem}
+.fx-note b{color:var(--mint); font-size:1.5rem; font-weight:900; white-space:nowrap}
+.fx-note .e{color:var(--est-dark)}
+
+/* ---------- 3 · Demo incrustada ---------- */
+.demo{background:linear-gradient(120deg, var(--navy), #0B2E2B); color:var(--on-navy); border:1px solid rgba(25,211,162,.45); border-radius:24px; padding:clamp(18px,3vw,32px)}
+.demo .sec-h p{color:var(--on-navy-2)}
+.device{max-width:980px; margin:0 auto; background:#0F1D33; border:1px solid rgba(255,255,255,.14); border-radius:18px 18px 12px 12px; padding:10px; box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.chrome{display:flex; align-items:center; gap:6px; padding:2px 4px 10px}
+.chrome i{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.22)}
+.chrome i:first-child{background:#FF6B5E}
+.chrome i:nth-child(2){background:#F5BF4F}
+.chrome i:nth-child(3){background:var(--mint)}
+.chrome span{flex:1; min-width:0; margin-left:8px; background:rgba(255,255,255,.07); border-radius:99px; padding:4px 12px; font-family:var(--mono); font-size:11.5px; color:var(--on-navy-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.screen{position:relative; aspect-ratio:16/10; border-radius:10px; overflow:hidden; background:#241C1B}
+.screen iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block}
+.tap{display:none}
+.base{max-width:1040px; height:14px; margin:0 auto; background:linear-gradient(#1A2B44, #0F1D33); border-radius:0 0 18px 18px; border:1px solid rgba(255,255,255,.12); border-top:0}
+.demo .btns{justify-content:center; margin-top:22px}
+
+/* ---------- 4 · Datos ---------- */
+.block{background:var(--paper); border:1px solid var(--line); border-radius:22px; padding:clamp(18px,2.6vw,28px)}
+.chartwrap{max-width:46rem}
+.cols{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(8px,2vw,20px); align-items:end; height:250px; padding-inline:4px; border-bottom:2px solid #9AA4AE;
+  background:linear-gradient(to top, var(--line) 1px, transparent 1px) 0 100%/100% 27.33% repeat-y}
+.col{height:100%; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; min-width:0}
+.col .v{font-family:var(--mono); font-size:12.5px; font-weight:600; margin-bottom:6px; white-space:nowrap}
+.col .b{width:100%; max-width:92px; background:#0FA07C; border-radius:8px 8px 0 0}
+.col.part .b{background:#7FCFB9}
+.labs{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(8px,2vw,20px); padding-inline:4px; margin-top:8px; text-align:center; font-size:.85rem; font-weight:800}
+.labs small{display:block; font-weight:500; color:var(--mute); font-size:.75rem}
+.read{margin-top:18px; display:flex; gap:12px; align-items:flex-start; font-size:1.08rem; font-weight:800; max-width:46rem}
+.read::before{content:""; flex:none; width:6px; align-self:stretch; border-radius:4px; background:var(--mint)}
+.read mark{background:linear-gradient(transparent 52%, rgba(25,211,162,.42) 52%); color:inherit; padding:0 .08em}
+.src{margin-top:10px; font-family:var(--mono); font-size:11.5px; color:var(--mute)}
+
+
+.free{display:grid; grid-template-columns:auto minmax(0,1fr); gap:18px 28px; align-items:center; background:var(--navy); color:var(--on-navy); border-radius:22px; padding:clamp(18px,2.6vw,26px); margin-bottom:22px}
+.free .stamp{width:clamp(140px,16vw,170px); transform:rotate(-8deg)}
+.free .stamp .s2{font-size:clamp(1.8rem,2.8vw,2.2rem)}
+.free h3{font-size:clamp(1.4rem,3vw,2rem); line-height:1.08; font-weight:900; letter-spacing:-.01em}
+.free h3 em{color:var(--mint)}
+.free p{margin-top:8px; color:var(--on-navy-2)}
+.prices{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+.pc{background:var(--navy); color:var(--on-navy); border:2px solid rgba(25,211,162,.55); border-radius:22px; padding:20px 18px; display:flex; flex-direction:column; gap:14px; min-width:0}
+.pc h3{font-size:1.45rem; line-height:1.05; font-weight:900; letter-spacing:-.01em}
+.pc h3 em{color:var(--mint); display:block}
+.pc .why{font-size:1rem; line-height:1.35; font-weight:700; color:var(--on-navy-2); margin-top:-6px}
+.gen{background:rgba(25,211,162,.12); border:1px solid rgba(25,211,162,.45); border-radius:14px; padding:12px 14px; display:grid; gap:3px}
+.gen .lb{font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--on-navy-3)}
+.gen b{font-size:clamp(1.9rem,3.2vw,2.35rem); line-height:1.05; font-weight:900; letter-spacing:-.02em; color:var(--mint); white-space:nowrap}
+.gen .sub{font-size:.88rem; font-weight:700; color:var(--on-navy-2)}
+.pc .e{color:var(--est-dark)}
+.does{margin:0; padding:0; list-style:none; display:grid; gap:9px; font-size:.95rem; line-height:1.38; color:var(--on-navy-2)}
+.does li{display:grid; grid-template-columns:18px minmax(0,1fr); gap:8px}
+.does li::before{content:"✓"; color:var(--mint); font-weight:900}
+.does b{color:var(--on-navy)}
+.price{margin-top:auto; border-top:1px dashed var(--line-dark); padding-top:14px; display:grid; gap:6px}
+.amount{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px}
+.amount s{font-size:1.2rem; font-weight:700; color:var(--on-navy-3)}
+.amount b{font-size:clamp(2.2rem,4vw,2.7rem); line-height:1; font-weight:900; letter-spacing:-.03em; color:var(--mint)}
+.amount span{font-size:.88rem; font-weight:700; color:var(--on-navy-3)}
+.monthly{font-size:.95rem; line-height:1.35; color:var(--on-navy-2); min-height:2.7em}
+.monthly b{color:var(--on-navy)}
+.allin{margin-top:14px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 18px; background:var(--navy); color:var(--on-navy-2); border-radius:16px; padding:16px 18px; font-size:1rem}
+.allin .big{color:var(--mint); font-size:1.6rem; font-weight:900; white-space:nowrap}
+.allin .e{color:var(--est-dark)}
+.allin .fee{flex-basis:100%; font-size:.95rem}
+.allin .fee b{color:var(--on-navy)}
+.half{margin-top:10px; text-align:center; font-weight:700; color:var(--ink-2)}
+.half b{color:var(--ink)}
+details{margin-top:14px; border:1px solid var(--line); border-radius:14px; background:var(--paper)}
+summary{cursor:pointer; padding:13px 16px; font-weight:800; font-size:.95rem; list-style-position:inside}
+.det{padding:0 16px 16px; display:grid; grid-template-columns:minmax(0,1fr); gap:16px}
+.det h4{margin:0 0 6px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--mint-text)}
+.tbl{overflow-x:auto}
+table.sup{width:100%; border-collapse:collapse; font-size:.88rem; min-width:30rem}
+table.sup th, table.sup td{text-align:left; padding:7px 10px; border-top:1px solid var(--line); vertical-align:top}
+table.sup th{font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--mute)}
+table.sup td.r{text-align:right; font-family:var(--mono); font-weight:600; white-space:nowrap}
+table.sup tr.tot td{font-weight:900; color:var(--mint-text); border-top:2px solid var(--ink)}
+.det ul{margin:0; padding-left:1.1rem; display:grid; gap:5px; font-size:.9rem; color:var(--ink-2)}
+
+/* ---------- 6 · Cierre ---------- */
+.closing{background:linear-gradient(120deg, var(--navy), #0B2E2B); color:var(--on-navy); border:1px solid rgba(25,211,162,.45); border-radius:24px; padding:clamp(20px,3.2vw,36px); text-align:center}
+.closing .sec-h{justify-items:center}
+.closing .sec-h p{color:var(--on-navy-2)}
+.steps{list-style:none; margin:6px 0 0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; counter-reset:paso; text-align:left}
+.steps li{position:relative; background:rgba(255,255,255,.05); border:1px solid var(--line-dark); border-radius:18px; padding:18px 16px; display:grid; gap:8px; align-content:start; counter-increment:paso; min-width:0}
+.steps li::after{content:counter(paso); position:absolute; top:12px; right:16px; font-size:2.4rem; line-height:1; font-weight:900; color:rgba(25,211,162,.28)}
+.steps .ico{width:46px; height:46px; border-radius:14px; background:var(--mint); color:var(--mint-ink); display:grid; place-items:center}
+.steps .ico svg{width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.steps h3{font-size:1.2rem; line-height:1.15; font-weight:900}
+.steps p{font-size:.95rem; color:var(--on-navy-2)}
+.closing .btns{justify-content:center; margin-top:26px}
+.contact{margin-top:14px; font-size:.95rem; color:var(--on-navy-3)}
+.contact a{color:var(--on-navy); font-weight:800; text-decoration-color:rgba(25,211,162,.6); text-underline-offset:3px}
+.signature{display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px 20px; border-top:1px solid var(--line); padding-top:16px; font-size:.95rem}
+.signature b{font-weight:800}
+.signature span{color:var(--mute)}
+.signature a{color:inherit; font-weight:800; text-underline-offset:3px}
+footer{padding-block:22px 28px; font-size:.8rem; color:var(--on-navy-3)}
+.bar{position:fixed; left:0; right:0; bottom:0; z-index:5; background:rgba(10,20,36,.96); border-top:1px solid rgba(25,211,162,.35);
+  padding:10px max(14px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(14px, env(safe-area-inset-left, 0px))}
+.bar a{display:block; max-width:34rem; margin:0 auto; background:var(--mint); color:var(--mint-ink); font-weight:900; font-size:16px; text-align:center; text-decoration:none; border-radius:12px; padding:13px}
+
+@media (max-width: 960px){
+  .fixes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .prices{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 760px){
+  body{font-size:16px}
+  .hero, .prices, .steps{grid-template-columns:minmax(0,1fr)}
+  .hero .stamp{width:150px; order:-1; justify-self:end; margin-bottom:-24px}
+  /* móvil: la demo se pinta en un móvil virtual de 360×660 y se escala al hueco, entera y sin recortes; va sola y al tocarla se abre a pantalla completa */
+  .screen{aspect-ratio:360/660; height:auto}
+  .screen iframe{inset:auto; top:0; left:0; width:360px; height:660px; transform-origin:0 0; transform:scale(var(--k,.8)); pointer-events:none}
+  .tap{display:block; position:absolute; inset:0; z-index:2; text-decoration:none; -webkit-tap-highlight-color:transparent}
+  .tap span{position:absolute; top:6px; right:8px; background:rgba(36,28,27,.82); border:1.5px solid rgba(253,244,238,.4); color:#FDF4EE; border-radius:99px; padding:4px 10px; font-size:11px; font-weight:800; letter-spacing:.02em}
+  .base{display:none}
+  .demo{padding:16px 8px; margin-inline:-10px}
+  .device{border-radius:20px; padding:5px}
+  .chrome{padding:2px 4px 7px}
+}
+@media (max-width: 560px){
+  .fixes{grid-template-columns:minmax(0,1fr)}
+  .free{grid-template-columns:minmax(0,1fr); justify-items:center; text-align:center}
+  .btns .btn{flex:1 1 100%}
+  .labs{font-size:.78rem}
+  .col .v{font-size:11px}
+}
+/* Born: la demo se prepara a medida y se enseña en la llamada; cifras de la marca */
+.moments{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:4px}
+.mo{background:rgba(255,255,255,.05); border:1px solid rgba(25,211,162,.35); border-radius:16px; padding:14px 16px; display:grid; gap:6px; align-content:start}
+.mo .k{font-family:var(--mono); font-size:11.5px; letter-spacing:.12em; color:var(--mint); font-weight:600}
+.mo b{font-size:1.02rem; line-height:1.25}
+.mo span:not(.k){font-size:.92rem; color:var(--on-navy-2); line-height:1.4}
+.soon{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px 18px; margin-top:22px; text-align:center}
+.soon .pill{display:inline-block; border:1.5px solid var(--mint); color:var(--mint); border-radius:99px; padding:7px 14px; font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase}
+.stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.st{background:var(--cream); border:1px solid var(--line); border-radius:16px; padding:16px 18px}
+.st .v{font-size:clamp(1.6rem,3.4vw,2.3rem); font-weight:900; letter-spacing:-.02em; color:var(--ink); line-height:1}
+.st .l{margin-top:8px; font-size:.95rem; line-height:1.35; color:var(--ink-2)}
+.mega .n{font-size:clamp(2.7rem,8.4vw,6.2rem)}
+@media (max-width:760px){ .moments,.stats{grid-template-columns:minmax(0,1fr)} }
+/* Born v2 (24-nov noche): sin venta. Cada fuga con su cifra y su cuenta a la vista */
+.fx .gana{display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px; margin-top:-2px}
+.fx .gana b{font-size:1.6rem; font-weight:900; letter-spacing:-.02em; color:var(--mint); white-space:nowrap; line-height:1.05}
+.fx .gana span{font-size:.9rem; font-weight:700; color:var(--on-navy-2)}
+.fx .cuenta{font-family:var(--mono); font-size:11px; line-height:1.5; color:var(--on-navy-3); margin-top:-4px}
+.seen{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.seen .st .v{font-size:clamp(1.45rem,3vw,2rem)}
+.leak{margin-top:18px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.leak div{background:var(--navy); color:var(--on-navy-2); border-radius:16px; padding:16px 18px; line-height:1.35; font-weight:600}
+.leak b{display:block; color:var(--on-navy); font-size:clamp(1.5rem,3.2vw,2.1rem); font-weight:900; letter-spacing:-.02em; margin-bottom:4px; white-space:nowrap}
+.sum{margin-top:14px; background:var(--navy); color:var(--on-navy-2); border-radius:18px; padding:18px 20px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; border:2px solid var(--mint)}
+.sum .k{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mint); font-weight:600}
+.sum b{display:block; color:var(--on-navy); font-size:clamp(1.5rem,3vw,2.1rem); font-weight:900; letter-spacing:-.02em; white-space:nowrap; margin-top:4px}
+.sum .lead b{color:var(--mint)}
+.sum p{font-size:.92rem; margin-top:2px}
+.sum .e{color:var(--est-dark)}
+.stamp.hoy .s2{font-size:clamp(2.4rem,4vw,3.2rem)}
+.stamp.hoy .s3{letter-spacing:.08em; font-size:clamp(.8rem,1.3vw,.95rem); line-height:1.15}
+.nolose{margin-top:16px; text-align:center; font-size:clamp(1.15rem,2.4vw,1.45rem); font-weight:900; line-height:1.3; color:var(--on-navy)}
+.nolose em{font-style:normal; color:var(--mint)}
+@media (max-width:760px){ .seen,.leak,.sum{grid-template-columns:minmax(0,1fr)} }
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+
+<!-- 1 · PORTADA: lo que se queda sobre la mesa -->
+<div class="wrap">
+  <div class="in">
+    <div class="top"><a class="toplink" href="https://www.smart-compound.com/" target="_blank" rel="noopener" title="Nuestra web">SMART COMPOUND <b>·</b> <b>META TECH PROVIDER</b> <span class="web">Ver web ↗</span></a><div class="chip">PARA BORN</div></div>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Para Miguel · Born · 24 de noviembre de 2026</p>
+        <h1 class="pre">Lo que Born deja hoy sobre la mesa</h1>
+        <p class="mega num" aria-label="unos 400.000 euros al año"><span class="n">≈400.000 €</span><span class="u">/año</span></p>
+        <p class="month num"><b>≈33.500 €/mes</b> en ventas que ya eran vuestras <span class="e">estimado, prudente</span></p>
+        <p class="one">Clientas que ya llegaron a vuestra web, eligieron y se fueron en el último paso. Lo hemos medido con vuestro catálogo y vuestras políticas de hoy, y cada cifra lleva su cuenta.</p>
+        <div class="btns">
+          <a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Verlo en 10 minutos<small>Con vuestra propia tienda</small></a>
+          <a class="btn ghost" href="#fugas">Ver dónde se escapa</a>
+        </div>
+      </div>
+      <div class="stamp hoy" role="img" aria-label="Hoy, 567 tallas agotadas en vuestra web"><span class="s1">HOY</span><span class="s2">567</span><span class="s3">TALLAS<br>AGOTADAS</span></div>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+<main class="in sheet">
+
+  <!-- 2 · LO QUE HEMOS VISTO HOY EN VUESTRA WEB -->
+  <section class="block" aria-labelledby="h-visto">
+    <div class="sec-h"><h2 id="h-visto">Lo que hemos visto hoy en bornlivingyoga.com</h2><p>Sin comprar ni dejar datos, como lo vería cualquier clienta.</p></div>
+    <div class="seen">
+      <div class="st"><div class="v num">567 de 1.765</div><div class="l">tallas agotadas en productos que están a la venta (el 32 %). En 260 prendas falta al menos una talla.</div></div>
+      <div class="st"><div class="v">Solo de talla</div><div class="l">se pueden cambiar las prendas. Si no convence el color, la única salida es el reembolso.</div></div>
+      <div class="st"><div class="v">Solo por email</div><div class="l">llega el aviso de «ha vuelto tu talla». Compite en la bandeja con todas las promociones.</div></div>
+      <div class="st"><div class="v">Sin WhatsApp</div><div class="l">en vuestra web: ni para el pedido, ni para una duda, ni para volver a comprar.</div></div>
+      <div class="st"><div class="v">4 idiomas</div><div class="l">en vuestra web, para casi 50 mercados. Las dudas llegan a cualquier hora y en cualquiera de ellos.</div></div>
+      <div class="st"><div class="v">Sin opiniones</div><div class="l">de clientas en las fichas de producto: quien duda no ve a nadie que ya lo lleve.</div></div>
+    </div>
+    <div class="leak">
+      <div><b class="num">≈20.600 carritos</b>se quedan a medias cada mes: unos 1,2 M€ en prendas ya elegidas <span class="e">estimado</span></div>
+      <div><b class="num">≈106.000 €</b>vuelven cada mes en reembolsos, muchos solo por el color <span class="e">estimado</span></div>
+    </div>
+    <p class="read"><span>No hace falta recuperarlo todo. <mark>Con supuestos prudentes, ≈33.500 € al mes vuelven a ser venta.</mark></span></p>
+  </section>
+
+  <!-- 3 · DÓNDE SE ESCAPA Y CUÁNTO -->
+  <section class="mintband" id="fugas" aria-labelledby="h-fugas">
+    <div class="sec-h"><h2 id="h-fugas">Dónde se escapa, y cuánto vale cada fuga</h2><p>Lo que pasa hoy, lo que le llegaría a la clienta por el WhatsApp oficial de Born, y lo que os deja al mes.</p></div>
+    <div class="fixes">
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H7"/><circle cx="9.5" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/></svg></span><h3>El carrito a medias</h3></div>
+        <p class="gana"><b class="num">≈17.300 €</b><span>al mes en ventas <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>Pablo mete dos leggings, duda con la talla y se va. <b>Le llega un email que se queda sin abrir.</b></p>
+        <div class="llega"><span class="lb">→ Le llega esto</span>
+          <div class="wa">
+            <div class="wa-top"><i>B</i>Born <span class="ok">✓</span></div>
+            <p class="msg">Hola, Pablo 👋 Te guardamos tus leggings. ¿Dudas con la talla? Dime cuál usas y te digo cuál pedir.<small>19:46</small></p>
+            <p class="msg me">Normalmente una M<small>19:47</small></p>
+            <p class="msg">Entonces la M te va perfecta 👌 Lo terminas aquí mismo:<small>19:47</small></p>
+            <p class="cta">🛒 Terminar mi compra</p>
+          </div>
+        </div>
+        <p class="then">Paga desde el móvil en segundos, con la duda resuelta. Vuestro email de Klaviyo sigue igual.</p>
+        <p class="cuenta">20.650 carritos × 35 % con WhatsApp × 4 % que vuelve × 60 €</p>
+      </article>
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-3.5M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.9 3.5M20 20v-4h-4"/></svg></span><h3>La devolución por el color</h3></div>
+        <p class="gana"><b class="num">≈5.300 €</b><span>al mes en ventas <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>A Marta no le convence el color. <b>Como solo se cambia de talla, pide el reembolso</b> y la venta se pierde entera.</p>
+        <div class="llega"><span class="lb">→ Le llega esto</span>
+          <div class="wa">
+            <div class="wa-top"><i>B</i>Born <span class="ok">✓</span></div>
+            <p class="msg">Antes de devolverlo, Marta: ¿lo prefieres en otro color o en otro modelo? Te lo cambiamos 🔁 O saldo para tu próxima compra.<small>11:20</small></p>
+            <p class="cta">🔁 Cambiarlo por otro color</p>
+            <p class="cta">Seguir con el reembolso</p>
+          </div>
+        </div>
+        <p class="then">Una de cada diez se queda la prenda en otro color. El reembolso sigue a un clic.</p>
+        <p class="cuenta">106.200 € en reembolsos × 50 % recibe la oferta × 10 % que cambia</p>
+      </article>
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><h3>El top a juego</h3></div>
+        <p class="gana"><b class="num">≈3.700 €</b><span>al mes en ventas <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>Pau se compra unos leggings. <b>El top que combina se queda en la web</b> y el pedido sale tal cual.</p>
+        <div class="llega"><span class="lb">→ Le llega esto</span>
+          <div class="wa">
+            <div class="wa-top"><i>B</i>Born <span class="ok">✓</span></div>
+            <p class="msg">¡Gracias, Pau! 🙌 Tu pedido aún no ha salido. ¿Te añadimos el top a juego al mismo envío?<small>18:05</small></p>
+            <p class="cta">➕ Añadirlo a mi pedido</p>
+          </div>
+        </div>
+        <p class="then">El ticket sube sin un euro más en anuncios ni un envío más.</p>
+        <p class="cuenta">8.850 pedidos × 35 % con WhatsApp × 4 % que lo añade × 30 €</p>
+      </article>
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><h3>La clienta que no vuelve</h3></div>
+        <p class="gana"><b class="num">≈4.300 €</b><span>al mes en ventas <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>Ana compró en primavera. <b>Sale la colección nueva y se entera por Instagram, si se entera.</b></p>
+        <div class="llega"><span class="lb">→ Le llega esto</span>
+          <div class="wa">
+            <div class="wa-top"><i>B</i>Born <span class="ok">✓</span></div>
+            <p class="msg">Ana, ¿qué tal tus Coreskin? ⭐ Valóralos en un toque. Y ya está la colección de invierno, en tu talla M:<small>10:02</small></p>
+            <p class="cta">⭐⭐⭐⭐⭐ Valorar</p>
+            <p class="cta">Ver la colección</p>
+          </div>
+        </div>
+        <p class="then">Vuelve a comprar, y su opinión aparece en la ficha para la siguiente que duda.</p>
+        <p class="cuenta">81.700 clientas × 35 % con WhatsApp × 0,25 % al mes que vuelve × 60 €</p>
+      </article>
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg></span><h3>La talla agotada</h3></div>
+        <p class="gana"><b class="num">≈2.900 €</b><span>al mes en ventas <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>Lucía quiere el Legging Coreskin Chocolat en la L: <b>hoy está agotada, como la XL.</b> Se va sin comprar.</p>
+        <div class="llega"><span class="lb">→ Le llega esto</span>
+          <div class="wa">
+            <div class="so">Legging Coreskin · talla L <span class="ag">AGOTADA</span></div>
+            <p class="cta mint">🔔 Avísame por WhatsApp</p>
+            <p class="msg">¡Ya ha vuelto tu talla, Lucía! 🎉 El Legging Coreskin Chocolat en L vuelve a estar disponible:<small>09:15</small></p>
+            <p class="cta">Comprar ahora</p>
+          </div>
+        </div>
+        <p class="then">Compra el mismo día que reponéis, desde el móvil.</p>
+        <p class="cuenta">6 % de la demanda topa con una talla agotada × 30 % deja su WhatsApp × 30 % compra al volver</p>
+      </article>
+
+      <article class="fx">
+        <div class="fx-h"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v10H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span><h3>La duda, en 4 idiomas</h3></div>
+        <p class="gana"><b class="num">≈120 h</b><span>al mes de vuestro equipo <span class="e">estimado</span></span></p>
+        <p class="hoy"><span class="lb">✕ Hoy</span>«¿Dónde está mi pedido?», tallas y cambios llegan desde España, Francia o Alemania, <b>y vuestro equipo los atiende uno a uno.</b></p>
+        <div class="llega"><span class="lb">→ Pasa esto</span>
+          <div class="wa">
+            <div class="wa-top"><i>B</i>Born <span class="ok">✓</span></div>
+            <p class="msg me">Hi! Where is my order? 🙏<small>23:12</small></p>
+            <p class="msg">It's on its way, Emma! 🚚 It arrives on Thursday. Track it here:<small>23:12</small></p>
+            <p class="cta">📦 Track my order</p>
+          </div>
+        </div>
+        <p class="then">Respondido en segundos, en su idioma y de noche. Lo delicado pasa a vuestro equipo con todo el contexto.</p>
+        <p class="cuenta">885 consultas × 8 min + 1.770 devoluciones × 3 min; la IA resuelve el 60 %</p>
+      </article>
+
+    </div>
+    <div class="sum">
+      <div class="lead"><span class="k">Ventas recuperadas</span><b class="num">≈33.500 €/mes</b><p>unos 400.000 € al año <span class="e">estimado</span></p></div>
+      <div><span class="k">Beneficio</span><b class="num">≈15.000 €/mes</b><p>con un margen del 45 % <span class="e">estimado</span></p></div>
+      <div><span class="k">Tiempo del equipo</span><b class="num">≈120 h/mes</b><p>casi una persona a jornada completa <span class="e">estimado</span></p></div>
+    </div>
+  </section>
+
+  <!-- 4 · EN 10 MINUTOS -->
+  <section class="demo" id="demo" aria-labelledby="h-demo">
+    <div class="sec-h"><h2 id="h-demo">En 10 minutos, vuestra tienda funcionando</h2><p>Antes de la llamada preparamos una demo con vuestros productos, vuestras tallas agotadas de ese día y vuestras políticas. La veis tal y como la viviría una clienta de Born.</p></div>
+    <div class="moments">
+      <div class="mo"><span class="k">01 · VUESTRAS CIFRAS</span><b>Cada cifra de esta página, con vuestros datos</b><span>Ticket, conversión, devoluciones: la afinamos juntos en directo.</span></div>
+      <div class="mo"><span class="k">02 · SIN TOCAR NADA</span><b>Shopify, Klaviyo, Gorgias y Reveni siguen igual</b><span>Lo nuestro se suma por encima. Vuestro equipo no instala nada.</span></div>
+      <div class="mo"><span class="k">03 · Y UNA IDEA MÁS</span><b>Para vuestros 450 puntos de venta</b><span>Reposición de tiendas multimarca por WhatsApp. Os la contamos en la llamada.</span></div>
+    </div>
+    <p class="nolose">Si en 10 minutos no veis el dinero <em>en vuestra propia tienda</em>, colgáis y en paz.</p>
+    <div class="soon"><a class="btn big" href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Reservar los 10 minutos<small>Elegís día y hora</small></a></div>
+  </section>
+
+  <div class="signature"><span><b>Héctor Escobar</b> · COMPOUND (Meta Tech Provider) · <a href="https://www.smart-compound.com/" target="_blank" rel="noopener">smart-compound.com</a></span><span class="num">854 78 87 07 · teléfono y WhatsApp</span></div>
+
+  <details>
+    <summary>Ver todos los supuestos</summary>
+    <div class="det">
+      <div>
+        <h4>De dónde sale cada cifra</h4>
+        <ul>
+          <li>Venta online de ≈531.000 €/mes: el 25 % de los 25,5 M€ de 2025 (Modaes, 26 de marzo de 2026).</li>
+          <li>Ticket medio de 60 €: ≈8.850 pedidos web al mes. Con un 70 % de abandono, ≈20.650 carritos a medias (≈1,2 M€).</li>
+          <li>35 % de esas clientas con teléfono y permiso de WhatsApp: se pide con una casilla al pagar, como manda la ley.</li>
+          <li>Devoluciones del 20 % de la venta (≈106.200 €/mes) y margen del 45 %.</li>
+          <li>Clientas de los últimos 12 meses: ≈81.700 (1,3 pedidos de media cada una).</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Por qué es prudente</h4>
+        <ul>
+          <li>Contamos solo lo que se suma a lo que ya hacéis: el email de Klaviyo sigue y no nos lo apuntamos.</li>
+          <li>Los porcentajes de cada fuga (4 %, 10 %, 0,25 %…) son bajos a propósito. Son supuestos nuestros y en la llamada se cambian por los vuestros.</li>
+          <li>Las 567 tallas agotadas, la política de cambios, los idiomas y las fichas sin opiniones los hemos visto en vuestra web el 24 de noviembre.</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</main>
+</div>
+
+<footer class="wrap">
+  <div class="in">Fuentes: Modaes (26 de marzo de 2026: cifra de negocio de 2025, peso del canal online y puntos de venta) y bornlivingyoga.com, revisada el 24 de noviembre de 2026 sin comprar ni dejar datos (catálogo completo de 902 productos, tallas disponibles, política de cambios y devoluciones). Lo marcado con ≈ o «estimado» son cálculos nuestros y se ajustan con vuestras cifras.</div>
+</footer>
+
+<div class="bar"><a href="https://www.smart-compound.com/auditoria-hector" target="_blank" rel="noopener">Verlo en 10 minutos con vuestra tienda</a></div>
+
+</body>
+</html>
